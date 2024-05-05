@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Styling for cart items */
+        .cart-item {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+        }
+
+        .cart-item-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 1.2rem;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            font-weight: bold;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-quantity {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .menu h2 {
+            margin-bottom: 20px;
+        }
+
+        /* Styling for empty cart message */
+        .empty-cart {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .btn-delete {
+            background-color: #ff5252;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            color: #333;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        input,
+        textarea {
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">Ramen<span>Stoic</span>.</a>
+
+        <div class="navbar-nav">
+            <a href="/Home">Home</a>
+            <a href="/About">Tentang Kami</a>
+            <a href="/Menu">Menu</a>
+            <a href="Kontak">Kontak</a>
+            <a href="/Pemesanan">Pemesanan</a>
+        </div>
+
+        <div class="navbar-extra">
+            <a href="/Cart" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Menu Section start -->
+    <section id="menu" class="menu">
+        <h2><span>Keranjang</span> Kamu</h2>
+        <p>
+        <h2>Silahkan Di checkout </h2>
+        </p>
+        <% if (error.length !=0) { %>
+            <div class="alert alert-danger mt-2" role="alert">
+                <%= error %>
+            </div>
+            <% } %>
+
+                <div id="cart-items"></div>
+                <div class="total-section">
+                    <h3>Total: <span id="total-price"></span></h3>
+                </div>
+                <button class="btn" id="checkout-btn">Pesan Sekarang</button>
+
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Pesan Sekarang</h2>
+                        <form id="checkout-form" method="post" action="/checkout" onsubmit="submit()">
+                            <label for="table-number">Nomor Meja:</label>
+                            <input type="number" id="table-number" name="table_number" required><br><br>
+                            <label for="table-number">Alamat</label>
+                            <input type="hidden" id="cart-data" name="cart_data">
+
+                            <input type="text" id="table-number" name="address" required><br><br>
+                            <label for="notes">Catatan:</label><br>
+                            <textarea id="notes" name="notes" rows="4" cols="50"></textarea><br><br>
+                            <button type="submit" class="btn">Submit</button>
+                        </form>
+                    </div>
+                </div>
+    </section>
+
+    <!-- Feather Icons -->
+    <script>
+        feather.replace();
+    </script>
+
+    <!-- My Javascript -->
+    <script src="js/script.js"></script>
+    <script>
+
+        document.getElementById('checkout-form').addEventListener('submit', function (event) {
+            localStorage.clear();
+        })
+        document.addEventListener('DOMContentLoaded', function () {
+            // Dapatkan data keranjang dari localStorage
+            const cartData = JSON.parse(localStorage.getItem('cart'));
+            const cartItemsElement = document.getElementById('cart-items');
+            const totalElement = document.getElementById('total-price');
+
+            // Variable untuk menyimpan total harga
+            let totalPrice = 0;
+
+            // Jika tidak ada data keranjang, tampilkan pesan kosong
+            if (!cartData || Object.keys(cartData).length === 0) {
+                document.querySelector('.empty-cart').style.display = 'block';
+                totalElement.textContent = '0';
+                return;
+            }
+
+            // Loop melalui setiap item di keranjang dan tampilkan
+            Object.keys(cartData).forEach(menuId => {
+                const menu = cartData[menuId];
+                const itemHTML = `
+                <div class="cart-item">
+                    <img src="/img/menu/${menu.images}" alt="${menu.name}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <h3 class="cart-item-title">${menu.name}</h3>
+                        <p class="cart-item-price">${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(menu.price)}</p>
+                        <p class="cart-item-quantity">Quantity: ${menu.quantity}</p>
+                        <button class="btn-delete" onclick="deleteItemFromCart('${menuId}')">Hapus</button>
+                    </div>
+                </div>`;
+                cartItemsElement.innerHTML += itemHTML;
+
+                // Hitung total harga
+                totalPrice += menu.price * menu.quantity;
+            });
+
+            // Tampilkan total harga
+            totalElement.textContent = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalPrice);
+
+            // Tambahkan event listener untuk tombol "Pesan Sekarang" untuk menampilkan modal
+            document.getElementById('checkout-btn').addEventListener('click', function () {
+                const modal = document.getElementById('myModal');
+                modal.style.display = "block";
+
+
+                const cartData = JSON.parse(localStorage.getItem('cart'));
+
+                // Setel nilai input tersembunyi dengan data keranjang
+                document.getElementById('cart-data').value = JSON.stringify(cartData);
+
+                // Tutup modal saat tombol close ditekan
+                const closeModal = document.getElementsByClassName("close")[0];
+                closeModal.onclick = function () {
+                    modal.style.display = "none";
+                }
+
+                // Tutup modal saat area di luar modal ditekan
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            });
+        });
+
+        // Function untuk menghapus item dari keranjang
+        function deleteItemFromCart(menuId) {
+            let cartData = JSON.parse(localStorage.getItem('cart'));
+            delete cartData[menuId];
+            localStorage.setItem('cart', JSON.stringify(cartData));
+            location.reload(); // Reload halaman untuk menampilkan perubahan
+        }
+    </script>
+</body>
+
+</html>

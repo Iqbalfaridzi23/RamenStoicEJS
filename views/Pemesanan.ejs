@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Ramen Stoic</title>
+
+
+   <!-- Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap" rel="stylesheet" />
+
+   <!-- Feather Icons   -->
+   <script src="https://unpkg.com/feather-icons"></script>
+
+   <!-- My Style -->
+   <link rel="stylesheet" href="css/style.css" />
+
+
+   <style>
+      .transaction-list {
+         margin-top: 100px;
+         padding: 40px 20px;
+      }
+
+      .transaction {
+         background-color: #f1dac3;
+         border-radius: 8px;
+         color: #333;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+         padding: 20px;
+         margin-bottom: 20px;
+      }
+
+      .transaction p {
+         margin: 0;
+         margin-bottom: 5px;
+      }
+
+      .transaction ul {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+      }
+
+      .transaction ul li {
+         margin-bottom: 5px;
+      }
+   </style>
+</head>
+
+<body>
+   <!-- Navbar Start -->
+   <nav class="navbar">
+      <a href="#" class="navbar-logo">Ramen<span>Stoic</span>.</a>
+
+      <div class="navbar-nav">
+         <a href="/Home">Home</a>
+         <a href="/About">Tentang Kami</a>
+         <a href="/Menu">Menu</a>
+         <a href="Kontak">Kontak</a>
+         <a href="/Pemesanan">Pemesanan</a>
+      </div>
+
+      <div class="navbar-extra">
+         <a href="/cart" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
+         <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+      </div>
+   </nav>
+   <!-- Navbar End -->
+
+   <!-- Order Start-->
+
+   <section class="transaction-list" id="transaction-list">
+      <h2>Daftar Transaksi</h2>
+      <div class="transactions" id="transactions">
+         <!-- Iterasi dan tampilkan data transaksi -->
+         <% transactions.forEach(transaction=> { %>
+            <div class="transaction">
+               <p><strong>User:</strong>
+                  <%= transaction.user.username %>
+               </p>
+               <p><strong>No. Meja:</strong>
+                  <%= transaction.noMeja %>
+               </p>
+               <p><strong>Total:</strong>
+                  <%= transaction.total %>
+               </p>
+               <p><strong>Status:</strong>
+                  <%= transaction.status ? 'Completed' : 'Pending' %>
+               </p>
+               <p><strong>Tanggal:</strong>
+                  <%= new Date(transaction.transactionDate).toLocaleString() %>
+               </p>
+               <ul>
+                  <li><strong>Ramen yang dipesan :</strong></li>
+                  <% transaction.items.forEach(item=> { %>
+                     <li>
+                        <%= item.product.name %> (<%= item.quantity %>x)
+                     </li>
+                     <% }) %>
+               </ul>
+            </div>
+            <% }) %>
+      </div>
+   </section>
+
+
+   <!-- Order-->
+
+   <!-- Feather Icons -->
+   <script>
+      feather.replace();
+   </script>
+
+   <!-- My Javascript -->
+   <script src="js/script.js"></script>
+</body>
+
+</html>
