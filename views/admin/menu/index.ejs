@@ -1,0 +1,46 @@
+<%- include('../../partials/header.ejs') %>
+    <h1>Ramen</h1>
+
+    <a href="/admin/ramen/create" class="btn btn-primary mb-2">Tambah Ramen</a>
+    <% if (message.length !=0) { %>
+        <div class="alert alert-success mt-2" role="alert">
+            <%= message %>
+        </div>
+        <% } %>
+
+            <% if (error.length !=0) { %>
+                <div class="alert alert-danger mt-2" role="alert">
+                    <%= error %>
+                </div>
+                <% } %>
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Image</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (const menu of ramens) { %>
+                                <tr>
+                                    <td>
+                                        <%= menu.name %>
+                                    </td>
+                                    <td>
+                                        <img style="height: 200px;" src="/img/menu/<%= menu.images %>" alt="">
+                                    </td>
+                                    <td>
+                                        <%= menu.price %>
+                                    </td>
+                                    <td>
+                                        <a href="/admin/ramen/edit/<%= menu.id %>" class="btn btn-warning">Edit</a>
+                                        <a href="/admin/ramen/delete/<%= menu.id %>" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                <% } %>
+                        </tbody>
+                    </table>
+
+                    <%- include('../../partials/footer.ejs') %>

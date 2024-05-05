@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/css/register.css" />
+  <title>Login & Registration Form</title>
+  <!-- <link rel="stylesheet" href="/css/style.css"> -->
 
-    <link rel="stylesheet" href="css/login.css">
-
-    <link rel="stylesheet" href="style.css">
+  <!---Custom CSS File--->
 </head>
-<body>
-    <div class="form-container">
-        <h2>Login</h2>
-        <form action="/login" method ="post">
-            <div class="form-group">
-                <label for="name">Name : </label>
-                <input type="text" id="name" name="username"placeholder="masukkan nama" required autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label for="email">Email : </label>
-                <input type="email" id="email" name="email"placeholder="masukkan email" required autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label for="password">Password : </label>
-                <input type="password" id="password"placeholder="password" required>
-            </div>
-            <button type="submit" class="submit-btn">Login</button>
-        </form>
-        <p>Don't have account? <a href="/signUp">Sign Up</a></p>
+</div>
+<div class="registration form">
+  <header>Login</header>
+  <% if (error.length !=0) { %>
+    <div class="alert alert-danger mt-2" role="alert">
+      <%= error %>
     </div>
-    
+    <% } %>
+      <form action="/login" method="post">
+        <input type="email" id="email" name="email" placeholder="Enter your email">
+        <input type="password" id="password" name="password" placeholder="Create a password">
+        <input type="submit" class="button" value="Login">
+        <p>If you don't have account <span> <a href="/register">Disini</a></span>
+        </p>
+      </form>
+      <div class="signup">
+        </span>
+      </div>
+</div>
+</div>
 </body>
+
 </html>

@@ -1,0 +1,39 @@
+<%- include('../partials/header.ejs') %>
+
+    <h1>Dashboard Admin</h1>
+    <p>Selamat datang di dashboard admin!</p>
+
+    <div class="row">
+        <div class="col-md-4 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Jumlah Pengguna</h5>
+                    <p class="card-text">Total pengguna saat ini: <%= user %>
+                    </p>
+                    <a href="/admin/users" class="btn btn-primary">Lihat semua pengguna</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Jumlah Ramen</h5>
+                    <p class="card-text">Total ramen yang tersedia: <%= menu %>
+                    </p>
+                    <a href="/admin/ramen" class="btn btn-primary">Lihat semua ramen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Transaksi</h5>
+                    <p class="card-text">Total transaksi yang terjadi: <%= transaction %>
+                    </p>
+                    <a href="/admin/transactions" class="btn btn-primary">Lihat semua transaksi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../partials/footer.ejs') %>

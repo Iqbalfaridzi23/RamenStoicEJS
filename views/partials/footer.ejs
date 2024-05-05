@@ -1,0 +1,84 @@
+</div>
+</div>
+</div>
+</div>
+
+<footer class="text-center py-3">
+    <p>&copy; 2024 - Admin Panel. All rights reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/admin.js"></script>
+
+
+<script>
+    // Script untuk menandai item menu navigasi sebagai aktif
+    const currentPath = window.location.pathname;
+
+    const navLinks = document.querySelectorAll('.nav_link');
+
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+
+        if (href === currentPath) {
+            link.classList.add('active');
+        }
+    });
+
+    // Get the modal element
+
+
+    function showModal(transaction) {
+        var modal = document.getElementById("myModal");
+        var modalContent = document.querySelector(".modal-content");
+
+        // Pastikan modal, konten modal, dan ikon close ditemukan sebelum menampilkan
+        if (modal && modalContent) {
+            // Bersihkan konten modal sebelum menambahkan detail transaksi
+            modalContent.innerHTML = "";
+
+            // Tambahkan detail transaksi ke dalam konten modal
+            var transactionData = JSON.parse(transaction);
+            var transactionHTML = `
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Detail Transaksi</h2>
+            <p><strong>User:</strong> ${transactionData.user.username}</p>
+            <p><strong>Total:</strong> ${transactionData.total}</p>
+            <p><strong>Tanggal:</strong> ${new Date(transactionData.transactionDate).toLocaleString()}</p>
+            <p><strong>No. Meja:</strong> ${transactionData.noMeja}</p>
+            <p><strong>Catatan:</strong> ${transactionData.catatan}</p>
+            <p><strong>Alamat:</strong> ${transactionData.alamat}</p>
+            <h3>Item Pesanan:</h3>
+            <ul>
+        `;
+
+            // Tambahkan setiap item pesanan ke dalam konten modal
+            transactionData.items.forEach(item => {
+                transactionHTML += `<li>${item.product.name} (${item.quantity}x)</li>`;
+            });
+
+            transactionHTML += `</ul>`;
+
+            modalContent.innerHTML = transactionHTML;
+
+            let closeModalIcon = document.getElementById('closeModal')
+            // Tampilkan modal
+            modal.style.display = "block";
+
+            // Tambahkan event listener untuk menutup modal ketika ikon close diklik
+            closeModalIcon.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+        } else {
+            console.error("Elemen yang dibutuhkan tidak ditemukan!");
+        }
+    }
+
+
+
+</script>
+
+
+
+</body>

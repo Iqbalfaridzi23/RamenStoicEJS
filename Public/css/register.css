@@ -67,36 +67,20 @@ body{
  .form input:focus{
    box-shadow: 0 1px 0 rgba(0,0,0,0.2);
  }
-.form a{
-  font-size: 16px;
-  color: #009579;
+
+.signup a {
+  color: #fff; /* Ubah warna teks menjadi putih */
   text-decoration: none;
 }
-.form a:hover{
+
+.signup a:hover {
   text-decoration: underline;
 }
-.form input.button{
-  color: #fff;
-  background: #009579;
-  font-size: 1.2rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  margin-top: 1.7rem;
-  cursor: pointer;
-  transition: 0.4s;
+
+.signup a::before {
+  content: "Don't have an account? "; /* Tambahkan teks sebelum tautan */
 }
-.form input.button:hover{
-  background: #006653;
-}
-.signup{
-  font-size: 17px;
-  text-align: center;
-  justify-content: center;
-}
-.signup label{
-  color: #009579;
-  cursor: pointer;
-}
-.signup label:hover{
-  text-decoration: underline;
+
+.signup a::after {
+  content: " here"; /* Tambahkan teks setelah tautan */
 }

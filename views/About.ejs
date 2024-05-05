@@ -1,69 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ramen Stoic</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ramen Stoic</title>
 
-    <!-- Feather Icons   -->
-    <script src="https://unpkg.com/feather-icons"></script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap" rel="stylesheet" />
 
-    <!-- My Style -->
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
+  <!-- Feather Icons   -->
+  <script src="https://unpkg.com/feather-icons"></script>
 
-  <body>
-    <!-- Navbar Start -->
-    <nav class="navbar">
-      <a href="#" class="navbar-logo">Ramen<span>Stoic</span>.</a>
+  <!-- My Style -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 
-      <div class="navbar-nav">
-        <a href="index.html">Home</a>
-        <a href="About.html">Tentang Kami</a>
-        <a href="Menu.html">Menu</a>
-        <a href="Kontak.html">Kontak</a>
-        <a href="Pemesanan.html">Pemesanan</a>
+<body>
+  <!-- Navbar Start -->
+  <nav class="navbar">
+    <a href="#" class="navbar-logo">Ramen<span>Stoic</span>.</a>
+
+    <div class="navbar-nav">
+      <a href="/Home">Home</a>
+      <a href="/About">Tentang Kami</a>
+      <a href="/Menu">Menu</a>
+      <a href="Kontak">Kontak</a>
+      <a href="/Pemesanan">Pemesanan</a>
+    </div>
+
+    <div class="navbar-extra">
+      <a href="/cart" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
+      <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <!-- About Section Start -->
+  <section id="about" class="about">
+    <h2><span>Tentang</span> Kami</h2>
+
+    <div class="row">
+      <div class="about-img">
+        <img src="img/header1-bg,jpeg.jpg" alt="Tentang Kami" />
       </div>
-
-      <div class="navbar-extra">
-        <a href="#" id="search"><i data-feather="search"></i></a>
-        <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
-        <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+      <div class="content">
+        <h3>Kenapa Memilih Ramen Kami?</h3>
+        <p>
+          Karna selain menikmati ramen disini anda juga dapat belajar ilmu
+          stoikisme dan itu menjadi ciri khas kami
+        </p>
+        <p>
+          Soal Rasa boleh diadu, dan dipadukan dengan bahan dari alam untuk
+          mencapai kenikmatan yang tiada batasnya
+        </p>
       </div>
-    </nav>
-    <!-- Navbar End -->
+    </div>
+  </section>
+</body>
 
-    <!-- About Section Start -->
-    <section id="about" class="about">
-      <h2><span>Tentang</span> Kami</h2>
+<script>
+  feather.replace();
+</script>
 
-      <div class="row">
-        <div class="about-img">
-          <img src="img/header1-bg,jpeg.jpg" alt="Tentang Kami" />
-        </div>
-        <div class="content">
-          <h3>Kenapa Memilih Ramen Kami?</h3>
-          <p>
-            Karna selain menikmati ramen disini anda juga dapat belajar ilmu
-            stoikisme dan itu menjadi ciri khas kami
-          </p>
-          <p>
-            Soal Rasa boleh diadu, dan dipadukan dengan bahan dari alam untuk
-            mencapai kenikmatan yang tiada batasnya
-          </p>
-        </div>
-      </div>
-    </section>
-  </body>
+<!-- My Javascript -->
+<script src="js/script.js"></script>
 
-  <!-- About Section end -->
+<!-- About Section end -->
+
 </html>

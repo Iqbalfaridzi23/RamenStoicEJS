@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/css/register.css" />
+  <title>Login & Registration Form</title>
+  <!---Custom CSS File--->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</div>
+<div class="registration form">
+  <header>Signup</header>
+  <% if (error.length !=0) { %>
+    <div class="alert alert-danger mt-2" role="alert">
+      <%= error %>
+    </div>
+    <% } %>
+      <form action="/register" method="post">
+        <input type="text" id="name" name="username" placeholder="Enter your username">
+        <input type="email" id="email" name="email" placeholder="Enter your email">
+        <input type="password" id="password" name="password" placeholder="Create a password">
+        <input type="submit" class="button" value="Signup">
+      </form>
+      <div class="signup">
+        </span>
+      </div>
+</div>
+</div>
+</body>
+
+</html>

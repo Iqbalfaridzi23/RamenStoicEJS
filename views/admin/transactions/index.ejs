@@ -1,0 +1,81 @@
+<%- include('../../partials/header.ejs') %>
+    <h1>Transactions</h1>
+
+    <div class="content-wraper">
+        <% if (message.length !=0) { %>
+            <div class="alert alert-success mt-2" role="alert">
+                <%= message %>
+            </div>
+            <% } %>
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Total</th>
+                            <th>Tanggal</th>
+                            <th>No Meja</th>
+                            <th>Catatan</th>
+                            <th>Alamat</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (const transaction of transactions) { %>
+                            <tr>
+                                <td>
+                                    <td>
+                                        <% if (transaction.user) { %>
+                                            <%= transaction.user.username %>
+                                        <% } else { %>
+                                            No User
+                                        <% } %>
+                                    </td>
+                                    
+                                <td>
+                                    <%= new Date(transaction.transactionDate).toLocaleString() %>
+                                </td>
+                                <td>
+                                    <%= transaction.noMeja %>
+                                </td>
+                                <td>
+                                    <%= transaction.catatan %>
+                                </td>
+                                <td>
+                                    <%= transaction.alamat %>
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-4">
+                                        <% if (!transaction.status) { %>
+                                            <form clas action="/admin/transactions/aprove/<%= transaction.id %>"
+                                                method="post">
+                                                <button type="submit" class="btn btn-primary">Setuju</button>
+                                            </form>
+                                            <% } %>
+                                                <button onclick="showModal('<%= JSON.stringify(transaction) %>')"
+                                                    class="btn btn-secondary open-modal-btn">Detail</button>
+
+                                                <% if (!transaction.status) { %>
+                                                    <form action="/admin/transactions/decline/<%= transaction.id %>"
+                                                        method="post">
+                                                        <button type="submit" class="btn btn-danger">Tolak</button>
+                                                    </form>
+                                                    <% } %>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% } %>
+                    </tbody>
+                </table>
+
+                <div id="myModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+
+                    </div>
+                </div>
+    </div>
+
+
+
+
+    <%- include('../../partials/footer.ejs') %>
